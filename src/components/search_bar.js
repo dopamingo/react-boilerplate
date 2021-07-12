@@ -2,20 +2,21 @@
 // 따라서 JSX를 쓰는 모든 컴포넌트에 임포트 해야함
 import React, { Component } from 'react';
 
-// 함수형 컴포넌트 - 상태관리 못하고 다른 컴포넌트와 소통하지 못한다
-// const SearchBar = () => {
-// 	return <input />;
-// };
-
 // 클래스 컴포넌트 - 내부에 어떤 정보를 저장할 때...?
 // React.Component 클래스에게 받은 기능을 제공한다~
 class SearchBar extends Component{
-	render() {
-		return <input onChange={this.onInputChange} />;
+	constructor(props) { // 변수나 상태값을 초기화 하는데 주로 이용
+		super(props);
+
+		this.state = { term: ''}; // 첫번째 프로퍼티
 	}
-	// 인풋이 변화될때마다 실행하는 함수
-	onInputChange(event) {
-		console.log(event.target.value);
+	render() {
+		return (
+			<div>
+				<input onChange={event => this.setState({ term: event.target.value })} />
+				Value of Input: {this.state.term}
+			</div>
+		);
 	}
 }
 
