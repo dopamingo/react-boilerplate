@@ -15,7 +15,6 @@ class SearchBar extends Component{
 			// setState 함으로써 컴포넌트 리렌터링
 			<div> 
 				<input onChange={event => this.setState({ term: event.target.value })} />
-				Value of Input: {this.state.term}
 			</div>
 		);
 	}
