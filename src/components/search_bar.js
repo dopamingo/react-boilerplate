@@ -12,7 +12,8 @@ class SearchBar extends Component{
 	}
 	render() {
 		return (
-			<div>
+			// setState 함으로써 컴포넌트 리렌터링
+			<div> 
 				<input onChange={event => this.setState({ term: event.target.value })} />
 				Value of Input: {this.state.term}
 			</div>
