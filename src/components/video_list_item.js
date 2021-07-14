@@ -6,6 +6,7 @@ const VideoListItem = ({video, onVideoSelect}) => {
 	// 비디오를 가져와 새로운 video 나 새로운 변수를 생성하라는 의미
 	const imageUrl = video.snippet.thumbnails.default.url;
 	return (
+		// 이 프로퍼티는 클릭할 때마다 전달한 함수를 호출한한다
 		<li onClick={() => onVideoSelect(video)} className="list-group-item">
 			<div className="video-list media">
 				<div className="media-left">

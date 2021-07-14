@@ -14,9 +14,15 @@ class SearchBar extends Component{
 		return (
 			// setState 함으로써 컴포넌트 리렌터링
 			<div> 
-				<input onChange={event => this.setState({ term: event.target.value })} />
+				<input
+					value={this.state.term}
+					onChange={event => this.onInputChange(event.target.value)} />
 			</div>
 		);
+	}
+	onInputChange(term) {
+		this.setState({term}); // setState
+		this.props.onSearchTermChange(term); // 콜백함수 호출
 	}
 }
 

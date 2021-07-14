@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react'; // React 컴포넌트를 생성하고 관리하는 라이브러리 JSX 사용
 import ReactDOM from 'react-dom'; // React DOM 실제로 DOM에 렌더링하는 기능을 가진 라이브러리  
 import YTSearch from 'youtube-api-search';
@@ -15,8 +16,12 @@ class App extends Component {
       selectedVideo: null
     }; // 스테이트에 비디오를 빈 배열로 세팅
     
-    // 컴포넌트가 렌더링 되면서 검색을 실행하고, 검색이 완료되면 비디오에 값들을 업데이트
-    YTSearch({key: API_KEY, term: 'Surfboards'}, (videos) => {
+    this.videoSearch('surfboards'); // 초기 검색값
+  }
+
+  // 유튜브 검색을 리팩토링하여 하나의 메소드로 만듦
+  videoSearch(term) {
+    YTSearch({key: API_KEY, term: term}, (videos) => {
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
@@ -25,9 +30,10 @@ class App extends Component {
   }
 
   render() {
+    const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300)
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={videoSearch} />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
         // 비디오를 가져와서 선택한 비디오를 업데이트 그리고 이 프로퍼티를 비디오 리스트로 전달한다
